@@ -30,4 +30,22 @@ RSpec.describe Enigma do
     expect(enigma.random_key).to be_a(String)
     expect(enigma.random_key.length).to eq(5)
   end
+
+  it 'creates a key shift' do
+    enigma = Enigma.new
+
+    expect(enigma.key_shift("01010")).to eq([01, 10, 01, 10])
+  end
+
+  it 'creates a offset shift' do
+    enigma = Enigma.new
+
+    expect(enigma.offset_shift("050821")).to eq([4, 0, 4, 1])
+  end
+
+  it 'combines the shifts together' do
+    enigma = Enigma.new
+
+    expect(enigma.total_shift([01, 10, 01, 10], [4, 0, 4, 1])).to eq([5, 10, 5, 11])
+  end
 end
