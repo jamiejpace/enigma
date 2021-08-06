@@ -24,4 +24,12 @@ class Enigma
     shifts << key[3..4].to_i
     shifts
   end
+
+  def offset_shift(date)
+    squared = (date.to_i) ** 2
+    string_array = squared.to_s.split('')[-4..-1]
+    string_array.map do |string|
+      string.to_i
+    end
+  end
 end
