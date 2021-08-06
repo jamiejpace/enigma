@@ -5,12 +5,12 @@ class Enigma
   end
 
   def encrypt(message, key = random_key, date = current_date)
-    encrypted = []
+    encrypted = {:encryption => "", :key => key, :date => date}
     shifts = total_shift(key_shift(key), offset_shift(date))
     letters = message.split("")
     letters.each_with_index do |letter, index|
       new_index = @character_set.index(letter) + shifts[index % 4]
-      encrypted << @character_set[new_index % 27]
+      encrypted[:encryption] += @character_set[new_index % 27]
     end
     encrypted
   end
