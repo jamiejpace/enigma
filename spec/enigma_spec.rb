@@ -42,4 +42,10 @@ RSpec.describe Enigma do
 
     expect(enigma.offset_shift("050821")).to eq([4, 0, 4, 1])
   end
+
+  it 'combines the shifts together' do
+    enigma = Enigma.new
+
+    expect(enigma.total_shift([01, 10, 01, 10], [4, 0, 4, 1])).to eq([5, 10, 5, 11])
+  end
 end
