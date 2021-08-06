@@ -19,6 +19,21 @@ class Enigma
     encrypted
   end
 
+  def decrypt(ciphertext, key, date = current_date)
+    decrypted = {:decryption => "", :key => key, :date => date}
+    shifts = total_shift(key_shift(key), offset_shift(date))
+    letters = ciphertext.downcase.split("")
+    letters.each_with_index do |letter, index|
+      if @character_set.index(letter).nil?
+        encrypted[:encryption] << letter
+      else
+        new_index = @character_set.index(letter) - shifts[index % 4]
+        decrypted[:decryption] += @character_set[new_index % 27]
+      end
+    end
+    decrypted
+  end
+
   def current_date
     Date.today.strftime("%d%m%y")
   end
