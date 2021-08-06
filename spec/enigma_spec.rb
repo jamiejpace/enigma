@@ -40,6 +40,12 @@ RSpec.describe Enigma do
     expect(enigma.decrypt("keder ohulw", "02715", "040895")).to eq(expected)
   end
 
+  xit 'encrypts new letters based on shifts' do
+    enigma = Enigma.new
+
+    expect(enigma.encrypt_letters(["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"], [3, 27, 73, 20], encrypted[:encryption])).to eq (0)
+  end
+
   xit 'can return current date in correct format' do
     enigma = Enigma.new
 

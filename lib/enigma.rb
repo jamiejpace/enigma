@@ -19,6 +19,33 @@ class Enigma
     encrypted
   end
 
+  def decrypt(ciphertext, key, date = current_date)
+    decrypted = {:decryption => "", :key => key, :date => date}
+    shifts = total_shift(key_shift(key), offset_shift(date))
+    letters = ciphertext.downcase.split("")
+    letters.each_with_index do |letter, index|
+      if @character_set.index(letter).nil?
+        decrypted[:decryption] << letter
+      else
+        new_index = @character_set.index(letter) - shifts[index % 4]
+        decrypted[:decryption] += @character_set[new_index % 27]
+      end
+    end
+    decrypted
+  end
+
+  # def encrypt_letters(letters, shifts, hash_key)
+  #   letters.each_with_index do |letter, index|
+  #     if @character_set.index(letter).nil?
+  #       hash_key += letter
+  #     else
+  #       new_index = @character_set.index(letter) + shifts[index % 4]
+  #       hash_key += @character_set[new_index % 27]
+  #       require 'pry'; binding.pry
+  #     end
+  #   end
+  # end
+
   def current_date
     Date.today.strftime("%d%m%y")
   end
