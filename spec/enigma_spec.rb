@@ -2,9 +2,11 @@ require './spec/spec_helper'
 require './lib/enigma'
 
 RSpec.describe Enigma do
-  it 'exists' do
+  it 'exists and has attributes' do
     enigma = Enigma.new
     expect(enigma).to be_a(Enigma)
+    expect(enigma.character_set.length).to eq(27)
+    expect(enigma.character_set.class).to eq(Array)
   end
 
   it 'can encrypt' do
@@ -17,6 +19,7 @@ RSpec.describe Enigma do
               }
 
     expect(enigma.encrypt("hello world", "02715", "040895")).to eq(expected)
+    expect(enigma.encrypt("jamie pace", "01030", "050821")[:encryption]).to eq("oktmjjweho")
   end
 
   it 'can return current date in correct format' do
