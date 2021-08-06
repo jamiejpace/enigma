@@ -4,8 +4,15 @@ class Enigma
     @character_set = ("a".."z").to_a << " "
   end
 
-  def encrypt(message, date = current_date, key = random_key)
-
+  def encrypt(message, key = random_key, date = current_date)
+    encrypted = []
+    shifts = total_shift(key_shift(key), offset_shift(date))
+    letters = message.split("")
+    letters.each_with_index do |letter, index|
+      new_index = @character_set.index(letter) + shifts[index % 4]
+      encrypted << @character_set[new_index % 27]
+    end
+    encrypted
   end
 
   def current_date
