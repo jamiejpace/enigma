@@ -1,5 +1,5 @@
 class Enigma
-
+  attr_reader :character_set
   def initialize
     @character_set = ("a".."z").to_a << " "
   end
@@ -7,7 +7,7 @@ class Enigma
   def encrypt(message, key = random_key, date = current_date)
     encrypted = {:encryption => "", :key => key, :date => date}
     shifts = total_shift(key_shift(key), offset_shift(date))
-    letters = message.split("")
+    letters = message.downcase.split("")
     letters.each_with_index do |letter, index|
       new_index = @character_set.index(letter) + shifts[index % 4]
       encrypted[:encryption] += @character_set[new_index % 27]
