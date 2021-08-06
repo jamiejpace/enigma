@@ -7,7 +7,7 @@ RSpec.describe Enigma do
     expect(enigma).to be_a(Enigma)
   end
 
-  xit 'can encrypt' do
+  it 'can encrypt' do
     enigma = Enigma.new
 
     expected = {
@@ -35,17 +35,20 @@ RSpec.describe Enigma do
     enigma = Enigma.new
 
     expect(enigma.key_shift("01010")).to eq([01, 10, 01, 10])
+    expect(enigma.key_shift("02715")).to eq([02, 27, 71, 15])
   end
 
   it 'creates a offset shift' do
     enigma = Enigma.new
 
     expect(enigma.offset_shift("050821")).to eq([4, 0, 4, 1])
+    expect(enigma.offset_shift("040895")).to eq([1, 0, 2, 5])
   end
 
   it 'combines the shifts together' do
     enigma = Enigma.new
 
     expect(enigma.total_shift([01, 10, 01, 10], [4, 0, 4, 1])).to eq([5, 10, 5, 11])
+    expect(enigma.total_shift([02, 27, 71, 15], [1, 0, 2, 5])).to eq([3, 27, 73, 20])
   end
 end
