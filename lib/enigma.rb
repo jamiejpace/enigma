@@ -9,8 +9,12 @@ class Enigma
     shifts = total_shift(key_shift(key), offset_shift(date))
     letters = message.downcase.split("")
     letters.each_with_index do |letter, index|
-      new_index = @character_set.index(letter) + shifts[index % 4]
-      encrypted[:encryption] += @character_set[new_index % 27]
+      if @character_set.index(letter).nil?
+        encrypted[:encryption] << letter
+      else
+        new_index = @character_set.index(letter) + shifts[index % 4]
+        encrypted[:encryption] += @character_set[new_index % 27]
+      end
     end
     encrypted
   end
