@@ -1,0 +1,1 @@
+{:encryption=>"xibrddmugpu", :key=>"93132", :date=>"060821"}
