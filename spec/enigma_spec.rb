@@ -30,4 +30,10 @@ RSpec.describe Enigma do
     expect(enigma.random_key).to be_a(String)
     expect(enigma.random_key.length).to eq(5)
   end
+
+  it 'creates a key shift' do
+    enigma = Enigma.new
+
+    expect(enigma.key_shift("01010")).to eq([01, 10, 01, 10])
+  end
 end
