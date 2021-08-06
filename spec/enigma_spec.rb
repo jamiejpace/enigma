@@ -11,6 +11,8 @@ RSpec.describe Enigma do
 
   it 'can encrypt' do
     enigma = Enigma.new
+    allow(enigma).to receive(:current_date).and_return("060821")
+    allow(enigma).to receive(:random_key).and_return("36346")
 
     expected = {
                 encryption: "keder ohulw",
@@ -27,6 +29,7 @@ RSpec.describe Enigma do
     expect(enigma.encrypt("hello world", "02715", "040895")).to eq(expected)
     expect(enigma.encrypt("jamie pace", "01030", "050821")[:encryption]).to eq("oktmjjweho")
     expect(enigma.encrypt("hello world!", "02715", "040895")).to eq(expected2)
+    expect(enigma.encrypt("12 Grimmauld Place")).to eq({:date=>"060821", :encryption=>"12k drxfncwxmywupn", :key=>"36346"})
   end
 
   it 'can decrypt a message' do
@@ -46,10 +49,11 @@ RSpec.describe Enigma do
     expect(enigma.encrypt_letters(["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"], [3, 27, 73, 20], encrypted[:encryption])).to eq (0)
   end
 
-  xit 'can return current date in correct format' do
+  it 'can return current date in correct format' do
     enigma = Enigma.new
 
-    expect(enigma.current_date).to eq("050821")
+    expect(enigma.current_date.length).to eq(6)
+    expect(enigma.current_date.class).to eq(String)
   end
 
   it 'can create a random key' do

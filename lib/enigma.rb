@@ -6,19 +6,25 @@ class Enigma
   end
 
   def encrypt(message, key = random_key, date = current_date)
-    encrypted = {:encryption => "", :key => key, :date => date}
     shifts = total_shift(key_shift(key), offset_shift(date))
     letters = message.downcase.split("")
-    letters.each_with_index do |letter, index|
-      if @character_set.index(letter).nil?
-        encrypted[:encryption] << letter
-      else
-        new_index = @character_set.index(letter) + shifts[index % 4]
-        encrypted[:encryption] += @character_set[new_index % 27]
-      end
-    end
-    encrypted
+    encrypt_letters(letters, shifts, key, date)
   end
+
+  # def encrypt(message, key = random_key, date = current_date)
+  #   encrypted = {:encryption => "", :key => key, :date => date}
+  #   shifts = total_shift(key_shift(key), offset_shift(date))
+  #   letters = message.downcase.split("")
+  #   letters.each_with_index do |letter, index|
+  #     if @character_set.index(letter).nil?
+  #       encrypted[:encryption] << letter
+  #     else
+  #       new_index = @character_set.index(letter) + shifts[index % 4]
+  #       encrypted[:encryption] += @character_set[new_index % 27]
+  #     end
+  #   end
+  #   encrypted
+  # end
 
   def decrypt(ciphertext, key, date = current_date)
     decrypted = {:decryption => "", :key => key, :date => date}
@@ -35,17 +41,18 @@ class Enigma
     decrypted
   end
 
-  # def encrypt_letters(letters, shifts, hash_key)
-  #   letters.each_with_index do |letter, index|
-  #     if @character_set.index(letter).nil?
-  #       hash_key += letter
-  #     else
-  #       new_index = @character_set.index(letter) + shifts[index % 4]
-  #       hash_key += @character_set[new_index % 27]
-  #       require 'pry'; binding.pry
-  #     end
-  #   end
-  # end
+  def encrypt_letters(letters, shifts, key, date)
+    encrypted = {:encryption => "", :key => key, :date => date}
+    letters.each_with_index do |letter, index|
+      if @character_set.index(letter).nil?
+        encrypted[:encryption] += letter
+      else
+        new_index = @character_set.index(letter) + shifts[index % 4]
+        encrypted[:encryption] += @character_set[new_index % 27]
+      end
+    end
+    encrypted
+  end
 
   def current_date
     Date.today.strftime("%d%m%y")
