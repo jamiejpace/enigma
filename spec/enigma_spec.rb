@@ -40,6 +40,10 @@ RSpec.describe Enigma do
     expect(enigma.decrypt("keder ohulw", "02715", "040895")).to eq(expected)
   end
 
+  it 'returns a new letter by index' do
+
+  end
+
   xit 'can return current date in correct format' do
     enigma = Enigma.new
 

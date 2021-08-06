@@ -25,7 +25,7 @@ class Enigma
     letters = ciphertext.downcase.split("")
     letters.each_with_index do |letter, index|
       if @character_set.index(letter).nil?
-        encrypted[:encryption] << letter
+        decrypted[:decryption] << letter
       else
         new_index = @character_set.index(letter) - shifts[index % 4]
         decrypted[:decryption] += @character_set[new_index % 27]
