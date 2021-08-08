@@ -9,7 +9,7 @@
 ## General info
 This project uses Ruby to build a tool for encrypting and decrypting messages.
 ## Screenshots
-![Website Picture](https://user-images.githubusercontent.com/83834410/128053930-e7533171-74e3-49e4-981f-ec2d4b1ded3e.png)
+![enigma terminal screenshot](https://user-images.githubusercontent.com/81520519/128646994-8d59e138-1d23-45f5-a808-6ed38a6a294b.png)
 ## Learning Goals
 * Practice breaking a program into logical components
 * Build classes that demonstrate single responsibilities
