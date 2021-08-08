@@ -1,4 +1,5 @@
 require './lib/enigma'
+require './lib/helpable'
 
 handle = File.open(ARGV[0], "r")
 
@@ -13,5 +14,5 @@ puts "Created '#{ARGV[1]}' with the key #{decrypted_message[:key]} and date #{
 decrypted_message[:date]}"
 
 writer = File.open(ARGV[1], "w")
-writer.write(decrypted_message)
+writer.write(decrypted_message[:decryption])
 writer.close

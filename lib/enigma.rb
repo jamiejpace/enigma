@@ -1,5 +1,5 @@
 require 'date'
-require './helpable'
+require './lib/helpable'
 
 class Enigma
   include Helpable
