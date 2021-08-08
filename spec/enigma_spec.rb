@@ -9,7 +9,7 @@ RSpec.describe Enigma do
     expect(enigma.character_set.class).to eq(Array)
   end
 
-  it 'can encrypt' do
+  it 'can encrypt when given a date and a key' do
     enigma = Enigma.new
     allow(enigma).to receive(:current_date).and_return("060821")
     allow(enigma).to receive(:random_key).and_return("36346")
@@ -29,7 +29,30 @@ RSpec.describe Enigma do
     expect(enigma.encrypt("hello world", "02715", "040895")).to eq(expected)
     expect(enigma.encrypt("jamie pace", "01030", "050821")[:encryption]).to eq("oktmjjweho")
     expect(enigma.encrypt("hello world!", "02715", "040895")).to eq(expected2)
-    expect(enigma.encrypt("12 Grimmauld Place")).to eq({:date=>"060821", :encryption=>"12k drxfncwxmywupn", :key=>"36346"})
+  end
+
+  it 'can encrypt with a given key and current date' do
+    enigma = Enigma.new
+    allow(enigma).to receive(:current_date).and_return("060821")
+
+    expected = {:date=>"060821",
+                :encryption=>"12ropyduzjclyeciau",
+                :key=>"21688"
+              }
+    expect(enigma.encrypt("12 Grimmauld Place", "21688")).to eq(expected)
+  end
+
+
+  it 'can encrypt with a random key and current date' do
+    enigma = Enigma.new
+    allow(enigma).to receive(:current_date).and_return("060821")
+    allow(enigma).to receive(:random_key).and_return("36346")
+
+    expected = {:date=>"060821",
+                :encryption=>"12k drxfncwxmywupn",
+                :key=>"36346"
+              }
+    expect(enigma.encrypt("12 Grimmauld Place")).to eq(expected)
   end
 
   it 'can decrypt a message' do
@@ -43,10 +66,23 @@ RSpec.describe Enigma do
     expect(enigma.decrypt("keder ohulw", "02715", "040895")).to eq(expected)
   end
 
+  it 'can decrypt a message with a key and current date' do
+    enigma = Enigma.new
+    encrypted = enigma.encrypt("12 Grimmauld Place", "21688")
+    allow(enigma).to receive(:current_date).and_return("060821")
+
+    expected = {:date=>"060821",
+                :decryption=>"12 grimmauld place",
+                :key=>"21688"
+              }
+
+    expect(enigma.decrypt(encrypted[:encryption], "21688")).to eq (expected)
+  end
+
   xit 'encrypts new letters based on shifts' do
     enigma = Enigma.new
 
-    expect(enigma.encrypt_letters(["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"], [3, 27, 73, 20], encrypted[:encryption])).to eq (0)
+    expect(enigma.encrypt_letters(["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"], [3, 27, 73, 20], "02715", "040895")).to eq (0)
   end
 
   it 'can return current date in correct format' do
