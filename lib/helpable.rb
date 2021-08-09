@@ -13,6 +13,19 @@ module Helpable
     encrypted
   end
 
+  def decrypt_letters(letters, shifts, key, date)
+    decrypted = {:decryption => "", :key => key, :date => date}
+    letters.each_with_index do |letter, index|
+      if @character_set.index(letter).nil?
+        decrypted[:decryption] << letter
+      else
+        new_index = @character_set.index(letter) - shifts[index % 4]
+        decrypted[:decryption] += @character_set[new_index % 27]
+      end
+    end
+    decrypted
+  end
+
   def current_date
     Date.today.strftime("%d%m%y")
   end
