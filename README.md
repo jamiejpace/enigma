@@ -49,5 +49,4 @@ $  ruby ./lib/decrypt.rb encrypted.txt decrypted.txt <key> <date>
 Created by
 * [@jamiejpace](https://github.com/jamiejpace)
 
-~ feel free to contact us! ~
-~ enjoy! ~
+✨ feel free to contact me! ✨
