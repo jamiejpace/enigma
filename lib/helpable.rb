@@ -1,5 +1,5 @@
 module Helpable
-  
+
   def encrypt_letters(letters, shifts, key, date)
     encrypted = {:encryption => "", :key => key, :date => date}
     letters.each_with_index do |letter, index|
