@@ -1,6 +1,7 @@
 ### Enigma
 ## Table of contents
 * [General info](#general-info)
+* [Self Assessment](#self-assessment)
 * [Screenshots](#screenshots)
 * [Learning Goals](#learning-goals)
 * [Technologies](#technologies)
@@ -8,6 +9,8 @@
 * [Contact](#contact)
 ## General info
 This project uses Ruby to build a tool for encrypting and decrypting messages.
+## Self Assessment
+Based on the rubric found at https://backend.turing.edu/module1/projects/enigma/rubric, my self assessment is that this project meets expectations in all categories. 
 ## Screenshots
 ![enigma terminal screenshot](https://user-images.githubusercontent.com/81520519/128646994-8d59e138-1d23-45f5-a808-6ed38a6a294b.png)
 ## Learning Goals
